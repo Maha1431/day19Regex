@@ -5,37 +5,38 @@ using System.Text.RegularExpressions;
 
 namespace ValidationUsingRegex
 {
-    class RegexUserRegistration
+   public class RegexUserRegistration
 
     {
 
         public static string NAME_REGEX = "^[A-Z]{1}[A-Za-z]{3,}$";
-        public static string MOBILENUMBER_REGEX = "^[6-9]{1}[0-9]{9}$";
-        public static string EMAIL_REGEX = "^[0-9a-zA-z]+[.+-_][0,1}[0-9a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3}){0,1}";
-        public static string PASSWORD_REGEX = "^[a-zA-Z0-9]{8,}[&%$@]{1}";
+        public static string MOBILENUMBER_REGEX = "^[+][0-9]{2}[\\s][6-9]{1}[0-9]{9}$";
+        public static string EMAIL_REGEX = "^[0-9a-zA-z]+[.+-_]{0,1}[0-9a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3}){0,1}$";
+        public static string PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
 
 
-        public bool ValidateFirstName()
+         public bool ValidateFirstName(string name)
+         {
+             return Regex.IsMatch(name, NAME_REGEX);
+         }
+ 
+     // public bool ToCheckName(string name) => (Regex.IsMatch(name, NAME_REGEX));
+        public bool ValidateLastName( string name)
         {
-            return Regex.IsMatch("Maha", NAME_REGEX);
+            return Regex.IsMatch(name, NAME_REGEX);
         }
 
-        public bool ValidateLastName()
+        public bool ValidateMobileNumber(string number)
         {
-            return Regex.IsMatch("Lakshmi", NAME_REGEX);
+            return Regex.IsMatch(number, MOBILENUMBER_REGEX);
         }
-
-        public bool ValideMobileNumber()
+        public bool ValidateEmail(string email)
         {
-            return Regex.IsMatch("9123456781", MOBILENUMBER_REGEX);
+            return Regex.IsMatch(email, EMAIL_REGEX);
         }
-        public bool ValidateEmail()
+        public bool ValidatePassword(string password)
         {
-            return Regex.IsMatch("abc.XYZ@bl.co.in", EMAIL_REGEX);
-        }
-        public bool ValidatePassword()
-        {
-            return Regex.IsMatch("asZ2d34f$", PASSWORD_REGEX);
+            return Regex.IsMatch(password, PASSWORD_REGEX);
         }
     }
 }
